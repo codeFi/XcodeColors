@@ -270,6 +270,9 @@ void ApplyANSIColors(NSTextStorage *textStorage, NSRange textStorageRange, NSStr
 		{
 			NSRange seqRange = [seqRangeValue rangeValue];
 			[textStorage addAttributes:clearAttrs range:seqRange];
+			//Prevent long delays clearing console improvement: https://github.com/johnno1962/XcodeColors/commit/46ac1c325b122d3a8a0e17d75adf7dc393023411
+			seqRange.length = 2;
+			[textStorage replaceCharactersInRange:seqRange withString:@"\\["];
 		}
 	}
 }
